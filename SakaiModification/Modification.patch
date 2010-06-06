@@ -1,0 +1,28 @@
+diff --git a/slingtests/osgikernel/bundles/activemq/src/main/java/org/sakaiproject/nakamura/activemq/Activator.java b/slingtests/osgikernel/bundles/activemq/src/main/java/org/sakaiproject/nakamura/activemq/Activator.java
+index 2c8389f..4ec00ad 100644
+--- a/slingtests/osgikernel/bundles/activemq/src/main/java/org/sakaiproject/nakamura/activemq/Activator.java
++++ b/slingtests/osgikernel/bundles/activemq/src/main/java/org/sakaiproject/nakamura/activemq/Activator.java
+@@ -56,6 +56,9 @@ public class Activator implements BundleActivator {
+     // configure the broker
+     LOG.info("Adding ActiveMQ connector [" + brokerUrl + "]");
+ 	
++	//Add a network connection
++	NetworkConnector connector = broker.addNetworkConnector("static:(tcp://hostname:61616)");
++	connector.setDuplex(true);
+ 	
+ 	broker.addConnector(brokerUrl);
+     broker.start();
+diff --git a/slingtests/osgikernel/bundles/events/src/main/java/org/sakaiproject/nakamura/events/OsgiJmsBridge.java b/slingtests/osgikernel/bundles/events/src/main/java/org/sakaiproject/nakamura/events/OsgiJmsBridge.java
+index bd07c1f..70f7038 100644
+--- a/slingtests/osgikernel/bundles/events/src/main/java/org/sakaiproject/nakamura/events/OsgiJmsBridge.java
++++ b/slingtests/osgikernel/bundles/events/src/main/java/org/sakaiproject/nakamura/events/OsgiJmsBridge.java
+@@ -214,6 +214,9 @@ public class OsgiJmsBridge implements EventHandler {
+         }
+       }
+ 	  
++	  MessageProducer test_producer=clientSession.createProducer(null);
++	  Destination test_destination = clientSession.createQueue("SAMPLE_QUEUE");
++      test_producer.send(test_destination, msg);
+ 
+       producer.send(msg);
+     } catch (JMSException e) {

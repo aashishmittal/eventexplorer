@@ -9,8 +9,8 @@
   </parent>
   -->
   <groupId>amq</groupId>
-  <artifactId>sakailistener-classes</artifactId>
-  <version>UNKNOWN</version>
+  <artifactId>Sakailistener-classes</artifactId>
+  <version>Trial</version>
   <name>Sakai Listeners</name>
   <description>Listeners for Nakamura messages</description>
   

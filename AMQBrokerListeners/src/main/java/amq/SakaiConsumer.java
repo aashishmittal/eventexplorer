@@ -11,7 +11,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 public class SakaiConsumer {
 
-    private static String brokerURL = "tcp://ashish:61618";
+    private static String brokerURL = "tcp://hostname:61616";
     private static transient ConnectionFactory factory;
     private transient Connection connection;
     private transient Session session;
