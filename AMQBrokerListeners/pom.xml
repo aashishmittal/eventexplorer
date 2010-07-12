@@ -23,6 +23,7 @@
   </properties>
 
   <dependencies>
+  
     <dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-all</artifactId>
@@ -93,6 +94,24 @@
         <groupId>woodstox</groupId>
         <artifactId>wstx-asl</artifactId>
         <version>3.2.7</version>
+    </dependency>
+	<dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
+    </dependency>
+	
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-core</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+   <dependency>
+    	<groupId>org.mockito</groupId>
+    	<artifactId>mockito-all</artifactId>
+    	<version>1.8.2</version>
+    	<scope>test</scope>
     </dependency>
   </dependencies>
 
