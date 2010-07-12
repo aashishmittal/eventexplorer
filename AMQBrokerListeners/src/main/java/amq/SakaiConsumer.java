@@ -9,7 +9,9 @@ import javax.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class SakaiConsumer {
+import org.apache.cassandra.thrift.Cassandra;
+
+public class SakaiConsumer extends Base {
 
     private static String brokerURL = "tcp://hostname:61616";
     private static transient ConnectionFactory factory;
@@ -34,9 +36,10 @@ public class SakaiConsumer {
     public static void main(String[] args) throws JMSException {
     	SakaiConsumer consumer = new SakaiConsumer();
 		
+			Cassandra.Client client = setupConnection();
     		Destination destination = consumer.getSession().createQueue("SAMPLE_QUEUE");
     		MessageConsumer messageConsumer = consumer.getSession().createConsumer(destination);
-    		messageConsumer.setMessageListener(new Listener());
+    		messageConsumer.setMessageListener(new Listener(client));
     	}
     
 	

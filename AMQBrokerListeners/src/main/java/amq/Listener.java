@@ -28,7 +28,12 @@ import org.apache.cassandra.thrift.SliceRange;
 public class Listener extends Base implements MessageListener {
 
 	private static int id;
+	private static Cassandra.Client client;
 	
+	public Listener(Cassandra.Client clnt) {
+	    client=clnt;
+		id=0;
+	}
 	public Listener() {
 	    
 		id=0;
@@ -41,8 +46,7 @@ public class Listener extends Base implements MessageListener {
 	}
 	public void onMessage(Message message) {
 	try{
-	
-	Cassandra.Client client = setupConnection();
+
 	Map<String, List<ColumnOrSuperColumn>> job = new HashMap<String, List<ColumnOrSuperColumn>>();
     List<ColumnOrSuperColumn> columns = new ArrayList<ColumnOrSuperColumn>();
 	List<Column> column_list=new ArrayList<Column>();
@@ -69,9 +73,7 @@ public class Listener extends Base implements MessageListener {
 	 
      job.put(COLUMN_FAMILY_USERS, columns);
      client.batch_insert(KEYSPACE, "User1", job, ConsistencyLevel.ALL);
-
-	closeConnection();
-	
+	 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
